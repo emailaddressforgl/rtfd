@@ -1,0 +1,22 @@
+name: Generate RTFD
+
+on:
+  workflow_dispatch:
+
+jobs:
+  convert:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Convert DOCX to RTFD
+        run: |
+          textutil -convert rtfd SR565656.docx
+
+      - name: Upload RTFD artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SR565656-rtfd
+          path: SR565656.rtfd
